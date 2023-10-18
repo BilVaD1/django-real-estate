@@ -1,1 +1,6 @@
 https://www.youtube.com/watch?v=UsfR34yl9K8&list=PL2t6cW2FkFCg9Ky0CphSSr0pJwHNb1pny&ab_channel=API-Imperfect
+
+superuser:
+bilvad1@gmail.com
+User: admin
+Password: adimn

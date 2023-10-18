@@ -1,3 +1,41 @@
 from django.db import models
+from django.contrib.auth import get_user_model #  используется для получения модели пользователя, которая активна в данном проекте Django.
+from django.utils.translation import gettext_lazy as _
+from django_countries.fields import CountryField
+from phonenumber_field.modelfields import PhoneNumberField
 
-# Create your models here.
+from apps.common.models import TimeStampedUUIDModel # это пользовательская абстрактная модель, которую я описал ранее.
+
+User = get_user_model()
+
+# Enum для выбора пола (Gender)
+class Gender(models.TextChoices):
+    MALE = "Male", _("Male")
+    FEMALE = "Female", _("Female")
+    OTHER = "Other", _("Other")
+
+# наследуется от вашей пользовательской абстрактной модели TimeStampedUUIDModel.
+class Profile(TimeStampedUUIDModel):
+    user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE) #  это поле, которое устанавливает связь с моделью пользователя (OneToOneField), связанную через related_name="profile". Таким образом, каждый пользователь имеет только один профиль, и вы можете получить доступ к профилю пользователя через user.profile.
+    phone_number = PhoneNumberField(verbose_name=_("Phone Number"), max_length=30, default='+4154352432')
+    about_me = models.TextField(verbose_name=_("About me"), default="say something about yourself")
+    license = models.CharField(verbose_name=_("Real Estate license"), max_length=20, blank=True, null=True)
+    profile_photo = models.ImageField(verbose_name=_("Profile Photo"), default="/profile_default.png")
+    gender = models.CharField(verbose_name=_("Gender"), choices=Gender.choices, default=Gender.OTHER, max_length=20)
+    country = CountryField(verbose_name=_("Country"), default="KE", blank=False, null=False)
+    city = models.CharField(verbose_name=_('City'), max_length=180, default="Nairobi", blank=True, null=True)
+    is_buyer = models.BooleanField(verbose_name=_("Buyer"), default=False, help_text=_("Are you looking to Buy a Property?"))
+    is_seller = models.BooleanField(verbose_name=_("Seller"), default=False, help_text=_("Are you looking to sell a property?"))
+    is_agent = models.BooleanField(verbose_name=_("Agent"), default=False, help_text=_("Are you an agent?"))
+    top_agent = models.BooleanField(verbose_name=_("Top Agent"), default=False)
+    rating = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
+    num_reviews = models.IntegerField(verbose_name=_("Number of Reviews"), default=0, null=True, blank=True)
+
+
+    """
+    Этот метод возвращает строковое представление объекта Profile. 
+    Когда вы обращаетесь к объекту Profile в консоли или в административном интерфейсе, будет возвращено имя пользователя и слово "profile".
+    """
+    def __str__(self) -> str:
+        return f"{self.user.username}'s profile"
+

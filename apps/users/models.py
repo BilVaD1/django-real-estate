@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from .managers import CustomUserManage
 
 class User(AbstractBaseUser, PermissionsMixin):
-    pkid = models.BigAutoField(primary_key=True, editable=False) # оле для первичного ключа с типом BigAutoField. Это большое целочисленное поле с автоматическим инкрементом.
+    pkid = models.BigAutoField(primary_key=True, editable=False) # Поле для первичного ключа с типом BigAutoField. Это большое целочисленное поле с автоматическим инкрементом.
     id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True) # Поле для уникального идентификатора пользователя типа UUIDField. Уникальный идентификатор генерируется автоматически с использованием uuid.uuid4().
     username = models.CharField(verbose_name=_('Username'), max_length=255, unique=True)
     first_name = models.CharField(verbose_name=_('First Name'), max_length=50)
