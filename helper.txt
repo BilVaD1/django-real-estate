@@ -4,3 +4,7 @@ superuser:
 bilvad1@gmail.com
 User: admin
 Password: adimn
+
+
+Maitrap is set up for testing the emails
+uid and token for body in Postman are possible to take from the MailTrap inboxes mails
