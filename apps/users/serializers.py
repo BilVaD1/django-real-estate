@@ -18,7 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User #  указывает, что эта форма связана с моделью User.
-        fields=['id','username','email','first_name',"last_name",'full_name','gender','phone_number','profile_photo','country','city','top_seller'] # определяет, какие поля будут отображаться в форме.
+        fields=['id','username','email','first_name',"last_name",'full_name','gender','phone_number','profile_photo','country','city','top_seller'] # определяет, какие поля будут отображаться в ответе.
 
     def get_first_name(self, obj):
         return obj.first_name.title() # title() используются для преобразования имени и фамилии в формат с заглавной буквы.
@@ -40,6 +40,6 @@ class UserSerializer(serializers.ModelSerializer):
 class CreateUserSerializer(UserCreateSerializer):
     class Meta(UserCreateSerializer.Meta):
         model = User
-        fields = ['id','username','email','first_name','last_name','password']
+        fields = ['id','username','email','first_name','last_name','password'] # поля которые возвращаются в ответе
 
     

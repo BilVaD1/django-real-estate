@@ -131,9 +131,9 @@ AUTH_USER_MODEL = 'users.User' # Подключаем вручную настр�
 Здесь указывается, что для всех представлений в Django REST Framework используется 
 аутентификация с использованием JSON Web Tokens (JWT).
 '''
-REEST_FRAMEWORK = {
+REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        'rest_framework_simplejwt.authentication.JWTAuthentication'
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     )
 }
 
@@ -150,13 +150,13 @@ from datetime import timedelta
 SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": (
         "Bearer",
-        "JWT"
+        "JWT",
     ),
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=120),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'SIGNING_KEY': env("SIGNING_KEY"),
-    'AUTH_HEADER_NAME': "HTTP_AUTHORIZATION",
-    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken"),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=120),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "SIGNING_KEY": env("SIGNING_KEY"),
+    "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
 }
 
 

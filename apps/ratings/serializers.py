@@ -18,7 +18,7 @@ class RatingSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Rating
-        exclude = ["update_at", "pkid"]
+        exclude = ["update_at", "pkid"] # Поля которые исключаются из ответа
 
 
     """
