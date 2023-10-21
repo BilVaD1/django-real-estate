@@ -10,20 +10,19 @@ from rest_framework.renderers import JSONRenderer
 class ProfileJSONRenderer(JSONRenderer):
     charset = "utf-8"
 
-# Этот метод переопределяет метод render базового класса JSONRenderer.
-'''
-Входные параметры:
+    # Этот метод переопределяет метод render базового класса JSONRenderer.
+    '''
+    Входные параметры:
 
-data: данные, которые будут отрендерены.
-accepted_media_types: список поддерживаемых типов медиа.
-renderer_context: контекст рендеринга.
+    data: данные, которые будут отрендерены.
+    accepted_media_types: список поддерживаемых типов медиа.
+    renderer_context: контекст рендеринга.
 
-В методе сначала проверяется наличие ошибок в данных. 
-Если ошибки есть, то просто используется базовый рендерер. 
-В противном случае данные оборачиваются в словарь с ключом "profile" 
-и затем преобразуются в JSON.
-'''
-def render(self, data, media_type=None, renderer_context=None):
+    В методе сначала проверяется наличие ошибок в данных. 
+    Если ошибки есть, то просто используется базовый рендерер. 
+    В противном случае данные оборачиваются в словарь с ключом "profile" 
+    и затем преобразуются в JSON.
+    '''
     def render(self, data, accepted_media_types=None, renderer_context=None):
         errors = data.get("errors", None)
 
