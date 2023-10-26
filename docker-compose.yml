@@ -14,8 +14,9 @@ services:
             - .:/app
             - static_volume:/app/staticfiles
             - media_volume:/app/mediafiles
-        expose:
-            - "8000"
+        # This example maps port 8000 inside the container to port 8080 on the host.
+        ports:
+            - "8000:8000"
         # Specifies an environment file to be used by the container.
         env_file:
             - .env
@@ -28,6 +29,7 @@ services:
 
     postgres-db:
         image: postgres:12.0-alpine
+        # This example maps port 5432 inside the container to port 5432 on the host.
         ports:
             - "5432:5432"
         volumes:

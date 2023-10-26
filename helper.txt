@@ -16,6 +16,10 @@ docker compose logs - для проверки логов
 docker compose down
 
 
+The Makefile is a set of rules and commands to automate common tasks in a Dockerized Django project.(Not natively for Windows)
+Exmaple of using Makefile via command line:
+make build -> Builds all images specified in docker-compose.yml file
+
 Gpt:
 
 request - это объект, который представляет текущий HTTP-запрос в Django.
