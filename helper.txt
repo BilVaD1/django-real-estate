@@ -33,3 +33,30 @@ request.user.username - это атрибут объекта пользоват�
 екущего аутентифицированного пользователя, который делает текущий HTTP-запрос. 
 В вашем коде оно используется для сравнения с переменной username из URL, чтобы убедиться, что пользователь обновляет свой собственный профиль, а не чужой.
 
+
+
+
+pyproject.toml is a configuration file used in Python projects, primarily for configuration and settings related to tools and processes in the Python ecosystem. It serves as a central place to define various project-specific configurations. Here are some common use cases for pyproject.toml:
+
+Build Systems and Packaging:
+
+[build-system] section: It specifies the build backend and requirements for building the project. For example, it may include details about the build tools and dependencies needed during the build process.
+Code Formatting:
+
+[tool.black] section: It can be used to configure the black code formatter. In your provided snippet, it includes an exclusion pattern for files or directories that should not be formatted by black.
+Dependency Management:
+
+[tool.poetry] section: If you are using the Poetry dependency management tool, this section can include information about project dependencies, scripts, and other related settings.
+Linting and Style Checking:
+
+[tool.flake8] section: Configuration for the Flake8 linter can be placed here. Flake8 combines linting with style checking using plugins.
+Other Tools:
+
+Various other tools and settings may have their own sections within pyproject.toml. For instance, if you use mypy for static type checking, it might have a dedicated section for configuration.
+Standardized Configuration:
+
+As of PEP 518 and PEP 517, pyproject.toml is recognized as the standardized configuration file for Python projects. It helps unify configuration settings across different tools and encourages a consistent project structure.
+Readability and Maintainability:
+
+Having a centralized configuration file enhances the readability and maintainability of the project. Developers can easily find and modify project-wide settings in one place.
+Overall, pyproject.toml aims to provide a standardized and comprehensive configuration solution for Python projects, promoting consistency and ease of use across various tools and processes.
