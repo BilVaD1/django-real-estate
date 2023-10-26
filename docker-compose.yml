@@ -1,0 +1,53 @@
+version: "3.9"
+
+# This section defines the services (containers) that make up the application.
+services:
+    api:
+        build:
+            # Select current directory
+            context: .
+            dockerfile: ./docker/local/django/Dockerfile
+        # This sets the command to be executed when the container starts. In this case, it's running the /start script.
+        command: /start
+        # Volume is used to map files in host to the container. For example if I change smth in local it will chnage the file in docker also.
+        volumes:
+            - .:/app
+            - static_volume:/app/staticfiles
+            - media_volume:/app/mediafiles
+        expose:
+            - "8000"
+        # Specifies an environment file to be used by the container.
+        env_file:
+            - .env
+        # Specifies that this service depends on another service named "postgres-db." This ensures that the "postgres-db" service is started before the "api" service
+        depends_on:
+            - postgres-db
+        # This is a network named "estate-react."
+        networks:
+            - estate-react
+
+    postgres-db:
+        image: postgres:12.0-alpine
+        ports:
+            - "5432:5432"
+        volumes:
+            - postgres_data:/var/lib/postgresql/data/
+        environment:
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+            - POSTGRES_DB=${POSTGRES_DB}
+        networks:
+            - estate-react
+
+# This section defines additional details about the networks used in the services.
+networks:
+    # This network was defined earlier. Here, it specifies that the network driver is "bridge." The "bridge" network is the default network driver for Docker, allowing containers on the same host to communicate with each other.
+    estate-react:
+        driver: bridge
+
+# These volumes provide a way to persist data that needs to survive the lifecycle of containers. For example, the PostgreSQL data volume ensures that the database data persists even if the PostgreSQL container is stopped or removed. Similarly, the static and media volumes provide persistent storage for static and media files used by the Django application.
+volumes:
+    # This holds PostgreSQL data. It is a named volume, which means the data stored in this volume persists between container restarts.
+    postgres_data:
+    static_volume:
+    media_volume:

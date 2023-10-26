@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Exit the script if any command exits with a non-zero status.
+set -o errexit
+
+set -o pipefail
+
+#  Exit the script if variables are used before being set.
+set -o nounset
+
+
+# The --no-input flag is used to skip interactive prompts during the migration process.
+python3 manage.py migrate --no-input
+# Collect static files from all installed apps into the designated static file directory.
+# When you run collectstatic, Django will traverse through all your apps and copy their static files (such as CSS, JavaScript, images, etc.) into the designated directory. 
+# This directory is usually specified in your Django project's settings as STATIC_ROOT. 
+# Once collected, these static files can be served directly by a web server like Nginx or Apache in a production environment, providing better performance and caching capabilities.
+python3 manage.py collectstatic --no-input
+# Start the Django development server, listening on all available network interfaces (0.0.0.0) on port 8000.
+python3 manage.py runserver 0.0.0.0:8000

@@ -1,0 +1,39 @@
+#!/bin/bash
+
+set -o errexit
+
+set -o pipefail
+
+set -o nounset
+
+# This function checks if PostgreSQL is ready to accept connections. It attempts to establish a connection to the PostgreSQL database using the psycopg2 Python library. If the connection is successful, the function exits with a status of 0; otherwise, it exits with a status of -1.
+postgres_ready() {
+python << END
+import sys
+import psycopg2
+try:
+    psycopg2.connect( 
+        dbname="${POSTGRES_DB}",
+        user="${POSTGRES_USER}",
+        password="${POSTGRES_PASSWORD}",
+        host="${PG_HOST}",
+        port="${PG_PORT}",
+
+    )
+except psycopg2.OperationalError:
+    sys.exit(-1)
+sys.exit(0)
+END
+}
+
+until postgres_ready; do
+ >&2 echo "Waiting for PostgreSQL to become available....:-("
+ sleep 1
+done
+>&2 echo "PostgreSQL is ready!!!!...:-)"
+
+# The exec "$@" line executes the command provided as arguments to the script. This is a common pattern in entrypoint scripts to pass control to the command that Docker runs. The "$@" represents all the arguments passed to the script.
+exec "$@"
+
+
+# Overall, this script is a wait-for-PostgreSQL script, ensuring that the PostgreSQL service is ready before allowing the execution of subsequent commands in the Docker container.
