@@ -21,13 +21,12 @@ def test_user_full_name(base_user):
 
 def test_base_user_email_is_normalized(base_user):
     """Test that a new users email is normalized"""
-    email = "alpha@REALESTATE.COM"
+    email = "bilvad2@GMAIL.COM"
     assert base_user.email == email.lower()
 
-
 def test_super_user_email_is_normalized(super_user):
-    """Test that an admin users email is normalized"""
-    email = "alpha@REALESTATE.COM"
+    """Test that a superuser's email is normalized"""
+    email = "bilvad2@GMAIL.COM"
     assert super_user.email == email.lower()
 
 
@@ -56,21 +55,21 @@ def test_create_use_with_no_username(user_factory):
     """Test that creating a new user with no usrname raises an error"""
     with pytest.raises(ValueError) as err:
         user_factory.create(username=None)
-    assert str(err.value) == "Users must submit a username"
+    assert str(err.value) == "The username field cannot be empty"
 
 
 def test_create_user_with_no_firstname(user_factory):
     """Test creating a new user without a firstname raises an error"""
     with pytest.raises(ValueError) as err:
         user_factory.create(first_name=None)
-    assert str(err.value) == "Users must submit a first name"
+    assert str(err.value) == "The first name field cannot be empty"
 
 
 def test_create_user_with_no_lastname(user_factory):
     """Test creating a new user without a lastname raises an error"""
     with pytest.raises(ValueError) as err:
         user_factory.create(last_name=None)
-    assert str(err.value) == "Users must submit a last name"
+    assert str(err.value) == "The last name field cannot be empty"
 
 
 def test_create_superuser_with_no_email(user_factory):

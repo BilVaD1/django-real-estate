@@ -55,6 +55,7 @@ estate-db:
 test:
 	docker-compose exec api pytest -p no:warnings --cov=.
 
+# It's used for create an html report with test coverage of code
 test-html:
 	docker-compose exec api pytest -p no:warnings --cov=. --cov-report html
 
