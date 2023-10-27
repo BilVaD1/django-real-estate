@@ -20,6 +20,15 @@ down:
 show-logs:
 	docker-compose logs
 
+show-images:
+	docker images
+
+show-containers-ports:
+	docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}"
+
+show-running-containers:
+	docker ps
+
 # docker compose exec api - execute command inside the docker where api it's name of container
 migrate:
 	docker-compose exec api python3 manage.py migrate
