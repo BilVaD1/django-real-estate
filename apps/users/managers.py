@@ -3,6 +3,10 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.utils.translation import gettext_lazy as _
 
+'''
+CustomUserManage это подкласс BaseUserManager, предоставляемый Django для управления пользователями. 
+Он содержит методы для создания обычных пользователей и суперпользователей.
+'''
 class CustomUserManage(BaseUserManager):
 
     def email_validator(self, email):

@@ -5,8 +5,8 @@ from faker import Factory as FakerFactory
 from real_estate.settings.base import AUTH_USER_MODEL
 
 """
-In Django testing, a factories.py file is often used to define factory functions for creating test data. T
-hese factory functions help in generating model instances with predefined or random data,
+In Django testing, a factories.py file is often used to define factory functions for creating test data. 
+These factory functions help in generating model instances with predefined or random data,
 making it easier to set up test scenarios and ensuring that your tests are more robust and repeatable.
 
 Here are a few reasons why using a factories.py file can be beneficial:
@@ -30,7 +30,7 @@ Test readers can quickly understand the intent of the test without getting bogge
 
 faker = FakerFactory.create()
 
-@factory.django.mute_signals(post_save)
+@factory.django.mute_signals(post_save) # Этот декоратор отключает сигналы Django после сохранения объекта. В данном случае, он отключает сигнал post_save, который срабатывает после сохранения объекта в базе данных. Это может быть полезно при создании тестовых данных, чтобы избежать нежелательных побочных эффектов от сигналов.
 class ProfileFactory(factory.django.DjangoModelFactory):
     user = factory.SubFactory("tests.factories.UserFactory")
     phone_number = factory.LazyAttribute(lambda x: faker.phone_number())
@@ -64,7 +64,7 @@ class UserFactory(factory.django.DjangoModelFactory):
     is_staff = False
 
     class Meta:
-        model = AUTH_USER_MODEL
+        model = AUTH_USER_MODEL # Задает мета-класс, указывающий, что модель, для которой создается фабрика, это AUTH_USER_MODEL.
 
     @classmethod
     def _create(cls, model_class, *args, **kwargs):
