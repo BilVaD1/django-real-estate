@@ -5,6 +5,8 @@ bilvad1@gmail.com
 User: admin
 Password: adimn
 
+Admin panel:
+http://localhost:8080/supersecret/
 
 Maitrap is set up for testing the emails
 uid and token for body in Postman are possible to take from the MailTrap inboxes mails

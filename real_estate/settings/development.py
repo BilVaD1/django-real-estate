@@ -12,8 +12,8 @@ SITE_NAME = 'Real Estate'
 
 DATABASES = {
     'default':{
-        'ENGINE': env("POSTGRESS_ENGINE"),
-        'NAME': env('POSTGRES_DB'),
+        'ENGINE':env("POSTGRESS_ENGINE"),
+        'NAME':env('POSTGRES_DB'),
         'USER':env('POSTGRES_USER'),
         'PASSWORD':env('POSTGRES_PASSWORD'),
         'HOST':env('PG_HOST'),

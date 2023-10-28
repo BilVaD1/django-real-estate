@@ -88,4 +88,4 @@ isort:
 	docker-compose exec api isort . --skip env --skip migrations
 
 check-port:
-	sudo lsof -i :5432
+	lsof -i :5432

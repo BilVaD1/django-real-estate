@@ -14,9 +14,11 @@ services:
             - .:/app
             - static_volume:/app/staticfiles
             - media_volume:/app/mediafiles
-        # This example maps port 8000 inside the container to port 8080 on the host.
-        ports:
-            - "8000:8000"
+        # This maps port 8000 inside the container to port 8000 on the host.
+        #ports:
+        #    - "8000:8000"
+        #expose:
+        #    - "8000"
         # Specifies an environment file to be used by the container.
         env_file:
             - .env
@@ -29,7 +31,7 @@ services:
 
     postgres-db:
         image: postgres:12.0-alpine
-        # This example maps port 5432 inside the container to port 5432 on the host.
+        # This maps port 5432 inside the container to port 5432 on the host.
         ports:
             - "5432:5432"
         volumes:
@@ -40,6 +42,23 @@ services:
             - POSTGRES_DB=${POSTGRES_DB}
         networks:
             - estate-react
+
+    nginx:
+        restart: always
+        depends_on:
+            - api
+        volumes:
+            - static_volume:/app/staticfiles
+            - media_volume:/app/mediafiles
+        build:
+            context: ./docker/local/nginx
+            dockerfile: Dockerfile
+         # This maps port 80 inside the container to port 8080 on the host.
+        ports:
+            - "8080:80"
+        networks:
+            - estate-react
+
 
 # This section defines additional details about the networks used in the services.
 networks:
