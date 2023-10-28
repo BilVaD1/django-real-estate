@@ -21,6 +21,15 @@ DATABASES = {
     }
 }
 
+
+
+"""
+CSRF_TRUSTED_ORIGINS is a setting introduced in Django 3.1 to enhance security related to Cross-Site Request Forgery (CSRF) protection. 
+CSRF is an attack where a malicious website can make a user's browser perform an unwanted action on a different site where the user is authenticated.
+
+In the context of Django, when a POST request is made to the server, Django checks the origin of the request to prevent CSRF attacks. 
+If the origin of the request doesn't match any trusted origins, Django rejects the request.
+"""
 CSRF_TRUSTED_ORIGINS = ['http://localhost:8080']
 
 
