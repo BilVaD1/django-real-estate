@@ -25,6 +25,7 @@ services:
         # Specifies that this service depends on another service named "postgres-db." This ensures that the "postgres-db" service is started before the "api" service
         depends_on:
             - postgres-db
+            - redis
         # This is a network named "estate-react."
         networks:
             - estate-react
@@ -40,6 +41,47 @@ services:
             - POSTGRES_USER=${POSTGRES_USER}
             - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
             - POSTGRES_DB=${POSTGRES_DB}
+        networks:
+            - estate-react
+
+    redis:
+        image: redis:5-alpine
+        networks:
+            - estate-react
+
+    celery_worker:
+        build:
+            context: .
+            dockerfile: ./docker/local/django/Dockerfile
+        command: /start-celeryworker
+        # Mounts the current directory (.) into the /app directory in the container. 
+        volumes:
+            - .:/app
+        env_file:
+            - .env
+        depends_on:
+            - redis
+            - postgres-db
+        networks:
+            - estate-react
+
+    # Flower is a web-based monitoring tool for Celery.
+    flower:
+        build:
+            context: .
+            dockerfile: ./docker/local/django/Dockerfile
+        # Overrides the default command to start Flower when the container starts.
+        command: /start-flower
+        # Mounts the current directory (.) into the /app directory in the container. 
+        volumes:
+            - .:/app
+        env_file:
+            - .env
+        ports:
+            - "5557:5555"
+        depends_on:
+            - redis
+            - postgres-db
         networks:
             - estate-react
 

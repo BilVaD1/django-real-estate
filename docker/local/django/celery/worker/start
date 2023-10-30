@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -o errexit
+
+set -o nounset
+
+# watchmedo is used to automatically restart a Celery worker when changes are detected in Python files (*.py) within the real_estate/ directory. 
+watchmedo auto-restart -d real_estate/ -p "*.py" -- celery -A real_estate worker --loglevel=info
