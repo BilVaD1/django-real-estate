@@ -23,7 +23,7 @@ show-logs:
 show-images:
 	docker images
 
-show-containers-ports:
+show-ports:
 	docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}"
 
 show-running-containers:
