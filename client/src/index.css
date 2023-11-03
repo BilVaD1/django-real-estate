@@ -398,6 +398,7 @@ footer
 
 .footer .goTop:hover {
 	opacity: 0.7;
+	z-index: 1000;
 }
 
 .mobileVisible {

@@ -68,7 +68,7 @@ const AppHeader = () => {
                     placement='right' 
                     closable={false} 
                     onClose={closeDrawer} 
-                    visible={visible}
+                    open={visible}
                 >
                     <Link to="/properties" className="ant-anchor-link-title">Properties</Link>
                 </Drawer>

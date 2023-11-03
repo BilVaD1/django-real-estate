@@ -1,5 +1,5 @@
 import React from 'react'
-import { BackTop } from 'antd'
+import { FloatButton } from 'antd';
 import { Link } from 'react-router-dom'
 
 const AppFooter = () => {
@@ -37,11 +37,11 @@ const AppFooter = () => {
         </ul>
         <div className='copyright'>
           Copyright &copy; Real Estate {new Date().getFullYear()}
-          <BackTop>
+          <FloatButton.BackTop>
             <div className="goTop">
               <i className="fa fa-arrow-circle-up"></i>
             </div>
-          </BackTop>
+          </FloatButton.BackTop>
         </div>
       </div>
     </div>
