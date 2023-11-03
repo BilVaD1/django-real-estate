@@ -27,13 +27,38 @@ const AppHeader = () => {
             </div>
 
             <div className="mobileHidden">
-                <Anchor targetOffset={65}>
-                    <Anchor.Link href='#banner' title="Home"/>
-                    <Anchor.Link href='#about' title="About"/>
-                    <Anchor.Link href='#options' title="Options"/>
-                    <Anchor.Link href='#faq' title="FAQ"/>
-                    <Link to="/properties" className='ant-design-link-title'>Properties</Link>
-                </Anchor>
+                <Anchor
+                    targetOffset={65}
+                    direction="horizontal"
+                    items={[
+                    {
+                        key: 'home',
+                        href: '#banner',
+                        title: 'Home',
+                    },
+                    {
+                        key: 'about',
+                        href: '#about',
+                        title: 'About',
+                    },
+                    {
+                        key: 'options',
+                        href: '#options',
+                        title: 'Options',
+                    },
+                    {
+                        key: 'faq',
+                        href: '#faq',
+                        title: 'FAQ',
+                    },
+                    {
+                        key: 'properties',
+                        href: '/properties',
+                        title: 'Properties',
+                    },
+                    ]}
+                    
+                />
             </div>
             <div className="mobileVisible">
                 <Button type='primary' onClick={showDrawer}>
@@ -45,7 +70,7 @@ const AppHeader = () => {
                     onClose={closeDrawer} 
                     visible={visible}
                 >
-                    <Link to="/properties" className='ant-design-link-title'>Properties</Link>
+                    <Link to="/properties" className="ant-anchor-link-title">Properties</Link>
                 </Drawer>
             </div>
         </div>

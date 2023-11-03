@@ -36,10 +36,10 @@ const AppFooter = () => {
           </li>
         </ul>
         <div className='copyright'>
-          Copyright $copy; Real Estate {new Date().getFullYear()}
+          Copyright &copy; Real Estate {new Date().getFullYear()}
           <BackTop>
             <div className="goTop">
-              <i className="fas fas-arrow-circle-up"></i>
+              <i className="fa fa-arrow-circle-up"></i>
             </div>
           </BackTop>
         </div>

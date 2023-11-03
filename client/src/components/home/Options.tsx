@@ -21,14 +21,23 @@ const data = [
             },
         ],
     },
+    {
+        title: 'Sell a property',
+        content: [
+            {
+                icon: <ChromeOutlined />,
+                description: "Whenever you are, all you need is your browser to get started buying and selling properties"
+            },
+        ],
+    },
 ]
 
 const Options = () => {
   return (
     <div id='options' className='block options-block grey-bg'>
       <div className="fluid-container">
-        <h2>Choose an option that fits your needs</h2>
-        <p>It is a long established fact that a reader will be distracted</p>
+        <h2 className='text-3xl text-center'>Choose an option that fits your needs</h2>
+        <p className='text-center'>It is a long established fact that a reader will be distracted</p>
       </div>
       <List
         grid={{
