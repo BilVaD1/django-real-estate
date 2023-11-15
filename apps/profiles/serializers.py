@@ -7,11 +7,11 @@ from apps.ratings.serializers import RatingSerializer
 from .models import Profile
 
 class ProfileSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(source="user.username")
+    username = serializers.CharField(source="user.username") # означает, что поле username в сериализаторе будет получать данные из поля username объекта User, связанного с объектом профиля
     first_name = serializers.CharField(source="user.first_name")
     last_name = serializers.CharField(source="user.last_name")
     email = serializers.EmailField(source="user.email")
-    full_name = serializers.SerializerMethodField(read_only=True)
+    full_name = serializers.SerializerMethodField(read_only=True) # SerializerMethodField - Методические поля не хранят данные в объекте модели. Вместо этого они вычисляются с помощью метода, который определяется в сериализаторе.
     country = CountryField(name_only=True)
     reviews = serializers.SerializerMethodField(read_only=True)
 
